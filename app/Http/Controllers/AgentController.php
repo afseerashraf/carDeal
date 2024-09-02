@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Agent;
 use Illuminate\View\View;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use App\Http\Requests\LoginRequest;
+use Illuminate\Support\Facades\Auth;
 
 class AgentController extends Controller
 {
@@ -29,9 +31,9 @@ class AgentController extends Controller
         $password = $request->password;
 
         if(auth()->attempt(['email' => $email, 'password' => $password])){
-            return 'hii';
+            return redirect()->route('index');
         }else{
-            return 'no';
+            return redirect()->route('login');
         }
 
     }

@@ -56,7 +56,7 @@ Route::prefix('customer')->group(function(){
 Route::prefix('order')->group(function(){
     Route::controller(OrderController::class)->group(function(){
      Route::get('create', 'create')->name('create.order');
-     Route::post('store', 'store')->name('store.order');
+    //  Route::post('store', 'store')->name('store.order');
      Route::get('show', 'show')->name('show.orders');
     });
 });
