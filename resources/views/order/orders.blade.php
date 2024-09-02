@@ -14,13 +14,16 @@
         </tr>
     </thead>
     <tbody>
+        
         @foreach($orders as $order)
+        <tr>
         <td>{{ $loop->iteration  }}</td>
         <td>{{ $order->car->name }} </td>
         <td>{{ $order->car->brand->name }} </td>
         <td>{{ $order->agent->name }}</td>
         <td>{{ $order->customer->name }}</td>
         <td>{{ $order->amount }}</td>
+        </tr>
         @endforeach
 
     </tbody>
