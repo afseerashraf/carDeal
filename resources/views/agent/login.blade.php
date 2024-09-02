@@ -1,6 +1,9 @@
 @extends('layout.layout')
 @section('title') Agent Registerform @endsection
 <style>
+    *{
+        text-decoration: none;
+    }
     .continer{
         margin-top: 150px;
         margin-left: 300px;
@@ -15,6 +18,7 @@
 
 <div class="continer">
     <h3>Logim Form</h3>
+    <a href="{{ route('register') }}">Register</a>
     <form action="{{ route('agent.dologin') }}" method="post">
     @csrf
     <label for="email">email</label><br>
@@ -23,7 +27,7 @@
     <label for="password">Password</label><br>
     <input type="password" class="form-controller" name="password" placeholder="password"><br><br>
     @error('password') <div class="alert alert-danger">{{ $message }}</div>@enderror
-    <input type="submit" class="btn btn-outline-primary" value="register">
+    <input type="submit" class="btn btn-outline-primary" value="Login">
     </form>
 </div>
 

@@ -3,10 +3,9 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use App\Models\Agent;
-use Illuminate\Validation\Rules\Password;
+use App\Models\Car;
 
-class AgentRequest extends FormRequest
+class CarRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,9 +23,8 @@ class AgentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' =>['required', 'alpha'],
-            'email' => ['required', 'email'],
-            'password' => ['required',password::min(8)->letters()->numbers()]
+            'carName' => ['required', 'regex:/^[a-zA-Z\s]+$/'],
+            'brand_id' => ['required', 'numeric'],
         ];
     }
 }

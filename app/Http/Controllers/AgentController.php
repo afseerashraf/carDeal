@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\AgentRequest;
 use Illuminate\Http\Request;
 use App\Models\Agent;
+use Illuminate\View\View;
+use Illuminate\View\Middleware\ShareErrorsFromSession;
 
 class AgentController extends Controller
 {

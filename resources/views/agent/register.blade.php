@@ -1,6 +1,9 @@
 @extends('layout.layout')
 @section('title') Agent Registerform @endsection
 <style>
+    *{
+        text-decoration: none;
+    }
     .continer{
         margin-top: 150px;
         margin-left: 300px;
@@ -15,6 +18,7 @@
 
 <div class="continer">
     <h3>Register Form</h3>
+    <a href="{{ route('login') }}">already have an account</a>
     <form action="{{ route('agent.register') }}" method="post">
     @csrf
     <label for="name">Name</label><br>

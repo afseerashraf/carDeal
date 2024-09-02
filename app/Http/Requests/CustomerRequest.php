@@ -3,10 +3,10 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use App\Models\Agent;
-use Illuminate\Validation\Rules\Password;
-
-class AgentRequest extends FormRequest
+use App\Models\Customer;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
+class CustomerRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,9 +24,9 @@ class AgentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' =>['required', 'alpha'],
+            'name' => ['required', 'regex:/^[a-zA-Z\s]+$/'],
+            'mobile' => ['required', 'numeric',  'digits_between:10,12'],
             'email' => ['required', 'email'],
-            'password' => ['required',password::min(8)->letters()->numbers()]
         ];
     }
 }
