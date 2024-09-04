@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Order;
+use App\Observers\CarOrder;
 class OrderController extends Controller
 {
     public function create(){

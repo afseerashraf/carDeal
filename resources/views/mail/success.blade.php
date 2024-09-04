@@ -1,0 +1,1 @@
+<h1>🎉congrates {{ $order->customer->name }} Your Car{{ $order->car->name }} Order Has Been Successfully Placed! 🚗</h1>

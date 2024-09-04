@@ -20,7 +20,7 @@ Route::prefix('agent')->group(function () {
     });
 });
 
-Route::middleware('auth')->group(function () {
+
     Route::prefix('brand')->group(function () {
         Route::controller(BrandController::class)->group(function () {
             Route::get('index', 'index')->name('index');
@@ -51,6 +51,9 @@ Route::middleware('auth')->group(function () {
             Route::get('edit/{id}', 'edit')->name('customer.edit');
             Route::post('update', 'update')->name('update.customer');
             Route::get('delete/{id}', 'destroy')->name('customer.delete');
+            Route::get('restore/{id}', 'restore')->name('customer.restore');
+            Route::get('forcedelete/{id}', 'forcedelete')->name('customer.forcedelete')
+            ;
         });
     });
 
@@ -61,4 +64,3 @@ Route::middleware('auth')->group(function () {
             Route::get('show', 'show')->name('show.orders');
         });
     });
-});

@@ -23,7 +23,7 @@ class CustomerController extends Controller
         return redirect()->route('show.customers');
     }
     public function show(){
-        $customers = Customer::all();
+        $customers = Customer::withTrashed()->get();
         return view('customer.list', compact('customers'));
     }
     public function edit($id){
@@ -45,5 +45,19 @@ class CustomerController extends Controller
         $customer = Customer::find($customerID);
         $customer->delete();
         return redirect()->route('show.customers');
+    }
+    public function restore($id){
+        $customerID = Crypt::decrypt($id);
+        $customer = Customer::onlyTrashed()->find($customerID);
+        $customer->restore();
+        return redirect()->route('show.customers');
+
+    }
+    public function forcedelete($id){
+        $customerID = Crypt::decrypt($id);
+        $customer = Customer::withTrashed()->find($customerID);
+        $customer->forceDelete();
+        return redirect()->route('show.customers');
+
     }
 }
