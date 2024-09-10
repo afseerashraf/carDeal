@@ -11,7 +11,7 @@ class CarOrder
     /**
      * Handle the Order "created" event.
      */
-    public function store(Order $order): void
+    public function created(Order $order): void
     {
         info('Loading');
         Mail::to($order->customer->email)->send(new orderedMail($order));

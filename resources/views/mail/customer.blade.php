@@ -1,0 +1,1 @@
+<h1>🎉congrates {{ $customer->name }}  Welcome AFz Car community ! 🚗</h1>

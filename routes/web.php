@@ -52,8 +52,8 @@ Route::prefix('agent')->group(function () {
             Route::post('update', 'update')->name('update.customer');
             Route::get('delete/{id}', 'destroy')->name('customer.delete');
             Route::get('restore/{id}', 'restore')->name('customer.restore');
-            Route::get('forcedelete/{id}', 'forcedelete')->name('customer.forcedelete')
-            ;
+            Route::get('forcedelete/{id}', 'forcedelete')->name('customer.forcedelete');
+            
         });
     });
 

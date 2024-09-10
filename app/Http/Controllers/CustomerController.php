@@ -8,7 +8,6 @@ use App\Models\Customer;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 
-
 class CustomerController extends Controller
 {
     public function create(){
