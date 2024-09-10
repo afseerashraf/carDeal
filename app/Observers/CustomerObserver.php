@@ -14,8 +14,7 @@ class CustomerObserver implements ShouldHandleEventsAfterCommit
      */
     public function created(Customer $customer): void
     {
-        info('Loading');
-        Mail::to($customer->email)->send(new CustomerMail($customer));
+        
     }
 
     /**

@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Customer;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
-
+use App\Jobs\CustomerEmail;
 class CustomerController extends Controller
 {
     public function create(){
@@ -19,6 +19,7 @@ class CustomerController extends Controller
         $customer->mobile = $request->mobile;
         $customer->email = $request->email;
         $customer->save();
+        CustomerEmail::dispatch($customer);
         return redirect()->route('show.customers');
     }
     public function show(){
