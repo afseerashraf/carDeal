@@ -8,12 +8,15 @@ use App\Models\Customer;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use App\Jobs\CustomerEmail;
+
 class CustomerController extends Controller
 {
-    public function create(){
+    public function create()
+    {
         return view('customer.create');
     }
-    public function store(CustomerRequest $request){
+    public function store(CustomerRequest $request)
+    {
         $customer = new Customer();
         $customer->name = $request->name;
         $customer->mobile = $request->mobile;
@@ -22,16 +25,19 @@ class CustomerController extends Controller
         CustomerEmail::dispatch($customer);
         return redirect()->route('show.customers');
     }
-    public function show(){
+    public function show()
+    {
         $customers = Customer::withTrashed()->get();
         return view('customer.list', compact('customers'));
     }
-    public function edit($id){
+    public function edit($id)
+    {
         $customerID = Crypt::decrypt($id);
         $customer = Customer::find($customerID);
         return view('customer.update', compact('customer'));
     }
-    public function update(CustomerRequest $request){
+    public function update(CustomerRequest $request)
+    {
         $customerID = Crypt::decrypt($request->id);
         $customer = Customer::find($customerID);
         $customer->name = $request->name;
@@ -40,24 +46,30 @@ class CustomerController extends Controller
         $customer->save();
         return redirect()->route('show.customers');
     }
-    public function destroy(string $id){
+    public function destroy(string $id)
+    {
         $customerID = Crypt::decrypt($id);
         $customer = Customer::find($customerID);
         $customer->delete();
         return redirect()->route('show.customers');
     }
-    public function restore($id){
+    public function restore($id)
+    {
         $customerID = Crypt::decrypt($id);
         $customer = Customer::onlyTrashed()->find($customerID);
         $customer->restore();
         return redirect()->route('show.customers');
-
     }
-    public function forcedelete($id){
+    public function forcedelete($id)
+    {
         $customerID = Crypt::decrypt($id);
         $customer = Customer::withTrashed()->find($customerID);
         $customer->forceDelete();
         return redirect()->route('show.customers');
-
+    }
+    public function order($id){
+        $customerID = Crypt::decrypt($id);
+        $customer = Customer::find($customerID);
+        return view('customer.order', compact('customer'));
     }
 }

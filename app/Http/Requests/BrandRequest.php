@@ -22,7 +22,7 @@ class BrandRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'brandName' => ['required', 'regex:/^[a-zA-Z\s]+$/'],
+            'brandName' => ['required', 'regex:/^[a-zA-Z\s]+$/', 'unique:brands,name'],
         ];
     }
 }

@@ -8,6 +8,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Mail\Mailables\Attachment;
 
 class CustomerMail extends Mailable
 {
@@ -49,6 +50,11 @@ class CustomerMail extends Mailable
      */
     public function attachments(): array
     {
-        return [];
+        return [
+            Attachment::fromPath('D:\AFz\AFz photos\comic.png')
+            ->as('comic.png')
+            ->withMime('application/image'),
+
+        ];
     }
 }

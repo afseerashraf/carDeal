@@ -20,13 +20,13 @@
     @csrf
     <label for="brand">Customer Name</label><br>
     <input type="text" name="name" placeholder="customer name"><br>
-    @error('name') <div class="alert alert-danger">{{ $message }}</div>@enderror 
+    @error('name') <p class="alert alert-danger">{{ $message }}</p>@enderror 
     <label for="Mobile">Mobile</label><br>
     <input type="text" name="mobile" placeholder="Mobile"><br>
-    @error('mobile') <div class="alert alert-danger">{{ $message }}</div> @enderror 
+    @error('mobile') <p class="alert alert-danger">{{ $message }}</p> @enderror 
     <label for="email">Email</label><br>
     <input type="email" name="email" placeholder="email"><br><br>
-    @error('email') <div class="alert alert-danger">{{ $message}}</div> @enderror
+    @error('email') <p class="alert alert-danger">{{ $message}}</p> @enderror
     <input type="submit" class="form-cotroller btn btn-outline-success">
     </form>
 </div>

@@ -29,6 +29,7 @@ Route::prefix('agent')->group(function () {
             Route::get('edit/{id}', 'edit')->name('edit.brand');
             Route::post('update', 'update')->name('update.brand');
             Route::get('delete/{id}', 'destroy')->name('brand.delete');
+            Route::get('restore/{id}', 'restore')->name('brand.restore');
         });
     });
 
@@ -53,6 +54,7 @@ Route::prefix('agent')->group(function () {
             Route::get('delete/{id}', 'destroy')->name('customer.delete');
             Route::get('restore/{id}', 'restore')->name('customer.restore');
             Route::get('forcedelete/{id}', 'forcedelete')->name('customer.forcedelete');
+            Route::get('order/{id}', 'order')->name('customer.order');
             
         });
     });
@@ -62,5 +64,6 @@ Route::prefix('agent')->group(function () {
             Route::get('create', 'create')->name('create.order');
             Route::post('store', 'store')->name('store.order');
             Route::get('show', 'show')->name('show.orders');
+          
         });
     });

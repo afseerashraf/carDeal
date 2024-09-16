@@ -77,4 +77,12 @@ class BrandController extends Controller
         $brand->delete();
         return redirect()->route('show.brand');
     }
+    public function restore($id){
+        $brandID = Crypt::decrypt($id);
+        $brand = Brand::onlyTrashed()->find($brandID);
+        $brand->restore();
+        return redirect()->route('show.brand');
+       
+    }
+ 
 }
