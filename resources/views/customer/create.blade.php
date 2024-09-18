@@ -16,7 +16,7 @@
     
 <div class="continer">
     <h3>customers</h3>
-    <form action="{{ route('customer.store') }}" method="post">
+    <form action="{{ route('customer.store') }}" method="post" enctype="multipart/form-data">
     @csrf
     <label for="brand">Customer Name</label><br>
     <input type="text" name="name" placeholder="customer name"><br>
@@ -27,6 +27,7 @@
     <label for="email">Email</label><br>
     <input type="email" name="email" placeholder="email"><br><br>
     @error('email') <p class="alert alert-danger">{{ $message}}</p> @enderror
+    <input type="file" name="image"><br><br>
     <input type="submit" class="form-cotroller btn btn-outline-success">
     </form>
 </div>

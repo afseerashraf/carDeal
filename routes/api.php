@@ -7,5 +7,9 @@ use App\Http\Controllers\api\AgentLoginController;
 // Route::get('/user', function (Request $request) {
 //     return $request->user();
 // })->middleware('auth:sanctum');
-Route::post('store',([OrderController::class, 'store']));
 Route::post('login', ([AgentLoginController::class, 'login']));
+Route::middleware('auth:sanctum')->group(function(){
+   
+    Route::post('store',([OrderController::class, 'store']));
+});
+

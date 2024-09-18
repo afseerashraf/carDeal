@@ -21,6 +21,7 @@ Route::prefix('agent')->group(function () {
 });
 
 
+
     Route::prefix('brand')->group(function () {
         Route::controller(BrandController::class)->group(function () {
             Route::get('index', 'index')->name('index');

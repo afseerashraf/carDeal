@@ -20,7 +20,7 @@
     @csrf
     <label for="brand">Brand</label><br>
     <input type="text" name="brandName" placeholder="brand name">
-    @error('brandName') <div class="alert alert-danger">{{ $message }}</div>@enderror<br>
+    @error('brandName') <div class="alert alert-danger">{{ $message }}</div>@enderror<br><br>
     <input type="submit" class="form-cotroller btn btn-outline-success">
     </form>
 </div>

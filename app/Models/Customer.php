@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Customer extends Model
 {
     use SoftDeletes;
-
+    protected $fillable = ['name', 'mobile', 'email', 'image'];
 
     public function order(){
         return $this->hasOne(Order::class);

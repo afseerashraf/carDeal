@@ -8,6 +8,8 @@ use App\Models\Customer;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use App\Jobs\CustomerEmail;
+use Illuminate\Support\Facades\Storage;
+
 
 class CustomerController extends Controller
 {
@@ -17,11 +19,17 @@ class CustomerController extends Controller
     }
     public function store(CustomerRequest $request)
     {
-        $customer = new Customer();
-        $customer->name = $request->name;
-        $customer->mobile = $request->mobile;
-        $customer->email = $request->email;
-        $customer->save();
+        $input = [
+            'name' => $request->name,
+            'mobile' => $request->mobile,
+            'email' => $request->email,
+        ];
+        if($request->hasfile('image')){
+            $fileName = time()."_".$request->image->getClientOriginalExtension();
+            Storage::putFileAs('uploads/images', $request->image, $fileName);
+            $input['image'] = $fileName;
+        }
+        $customer = Customer::create($input);
         CustomerEmail::dispatch($customer);
         return redirect()->route('show.customers');
     }

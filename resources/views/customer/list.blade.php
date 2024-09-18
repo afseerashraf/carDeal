@@ -9,16 +9,18 @@
             <th scope="col">Customer Name</th>
             <th scope="col">Mobile</th>
             <th scope="col">Email</th>
+            <th scope="col">photo</th>
             <th scope="col">Action</th>
      </tr>
     </thead>
     <tbody>
         @foreach($customers as $customer)
         <tr>
-            <td>{{ $loop->iteration  }}</td>
-            <td>{{ $customer->name }}</td>
+            <td>{{ $loop->iteration }}</td>
+            <td>{{ ucfirst($customer->name) }}</td>
             <td>{{ $customer->mobile }}</td>
             <td>{{ $customer->email }}</td>
+            <td>{{ asset('storage/app/uploads/images/'.$customer->image) }}</td>
             <td>
             <a href="{{ route('customer.create') }}" class="btn btn-outline-success">New</a> 
             <a href="{{ route('customer.edit', encrypt($customer->id)) }}" class="btn btn-outline-primary">Edit</a>
