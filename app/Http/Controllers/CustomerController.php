@@ -26,7 +26,7 @@ class CustomerController extends Controller
         ];
         if($request->hasfile('image')){
             $fileName = time()."_".$request->image->getClientOriginalExtension();
-            Storage::putFileAs('uploads/images', $request->image, $fileName);
+            Storage::putFileAs('uploads/images',$request->image,$fileName);
             $input['image'] = $fileName;
         }
         $customer = Customer::create($input);
