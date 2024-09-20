@@ -8,16 +8,28 @@ use App\Models\Car;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\View\View;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Illuminate\Support\Facades\Storage;
+
 class CarController extends Controller
 {
     public function create(){
         return view('car.create');
     }
     public function store(CarRequest $request){
-        $car = new Car();
-        $car->name = $request->carName;
-        $car->brand_id = $request->brand_id;
-        $car->save();
+        // $car = new Car();
+        // $car->name = $request->carName;
+        // $car->brand_id = $request->brand_id;
+        // $car->save();
+        $input = [
+            'name' => $request->carName,
+            'brand_id' => $request->brand_id,
+        ];
+        if($request->hasFile($request->carimage)){
+            $fileName = time()."_".$request->carimage->getClientOriginalExtension();
+            Storage::putFileAs('uploads/images',$request->carimage,$fileName);
+            $input['image'] = $fileName;
+        }
+        $car = Car::create($input);
         return redirect()->route('show.cars');
     }
     public function show(){

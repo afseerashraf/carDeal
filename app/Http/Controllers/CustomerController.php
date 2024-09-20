@@ -78,6 +78,9 @@ class CustomerController extends Controller
     public function order($id){
         $customerID = Crypt::decrypt($id);
         $customer = Customer::find($customerID);
+       if(!$customer->order){
+        return "<h2>".$customer->name." does not have order"."</h2>";
+       }
         return view('customer.order', compact('customer'));
     }
 }
