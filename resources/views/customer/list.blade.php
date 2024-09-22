@@ -4,8 +4,10 @@
     img{
         height: 70px;
         width: 70px;
+        object-fit: cover;
         
     }
+   
 </style>
 @section('page')Our Customers @endsection
 

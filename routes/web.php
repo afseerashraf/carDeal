@@ -20,8 +20,6 @@ Route::prefix('agent')->group(function () {
     });
 });
 
-
-
     Route::prefix('brand')->group(function () {
         Route::controller(BrandController::class)->group(function () {
             Route::get('index', 'index')->name('index');
@@ -33,6 +31,7 @@ Route::prefix('agent')->group(function () {
             Route::get('restore/{id}', 'restore')->name('brand.restore');
         });
     });
+
 
     Route::prefix('car')->group(function () {
         Route::controller(CarController::class)->group(function () {
