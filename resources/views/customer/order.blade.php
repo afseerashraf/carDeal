@@ -2,6 +2,11 @@
     img{
         height: 70px;
         width: 70px;
+        border-radius: 50%;
+    }
+    ul{
+        margin-top: 100px;
+        margin-left: 507px;
     }
 </style>
 

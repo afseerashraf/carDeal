@@ -1,18 +1,29 @@
 @extends('layout.layout')
 @section('title') Agent Registerform @endsection
 <style>
-    *{
-        text-decoration: none;
-    }
-    .continer{
-        margin-top: 150px;
-        margin-left: 300px;
-        font-style: oblique;
-        
-    }
-    input{
-        width: 400px;
-    }
+   *{
+       
+       padding-left: 12px;
+   }
+   .continer{
+       padding-top: 12px;
+       text-decoration: none;
+       margin-top: 150px;
+       margin-left: 300px;
+       font-style: oblique;
+       background-color:#f2e7e5;
+       width: 454px;
+       height: 309px;
+       box-shadow: 1px 1px 1px 1px;
+       
+   }
+   input{
+       width: 400px;
+   }
+   form p{
+    padding-left: 166px;
+    padding-top: 35px;
+   }
 </style>
 @section('content')
 
@@ -28,6 +39,7 @@
     <input type="password" class="form-controller" name="password" placeholder="password"><br><br>
     @error('password') <div class="alert alert-danger">{{ $message }}</div>@enderror
     <input type="submit" class="btn btn-outline-primary" value="Login">
+    <p>cardealing</p>
     </form>
 </div>
 

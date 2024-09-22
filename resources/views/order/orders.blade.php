@@ -6,8 +6,9 @@
         width: 70px;
     }
 </style>
-@section('content')
+@section('page')Orders @endsection
 
+@section('content')
 <table class="table">
     <thead>
         <tr>

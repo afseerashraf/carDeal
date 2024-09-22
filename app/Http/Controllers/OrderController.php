@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Observers\CarOrder;
+use App\Jobs\CarorderMail;
+
 class OrderController extends Controller
 {
     public function create(){
@@ -17,6 +19,8 @@ class OrderController extends Controller
         $order->customer_id = $request->customer_id;
         $order->amount = $request->amount;
         $order->save();
+        CarorderMail::dispatch($order);
+
         return redirect()->route('show.orders');
     }
     public function show(){

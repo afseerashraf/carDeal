@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Crypt;
 use Illuminate\View\View;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Illuminate\Support\Facades\Storage;
-
 class CarController extends Controller
 {
     public function create(){
@@ -53,7 +52,18 @@ class CarController extends Controller
         $carID = Crypt::decrypt($id);
         $car = Car::find($carID);
         $car->delete();
-
         return redirect()->route('show.cars')->with('message', 'succesfully deleted');
+    }
+    public function restore($id){
+        $carID = Crypt::decrypt($id);
+        $car = Car::onlyTrashed()->find($carID)->restore();
+        return redirect()->route('show.cars');
+    }
+    
+    public function forceDelete($id){
+        $carID = Crypt::decrypt($id);
+        $car = Car::withTrashed()->find($carID)->forceDelete();
+        return redirect()->route('show.cars');
+
     }
 }

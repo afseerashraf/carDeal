@@ -42,6 +42,9 @@ Route::prefix('agent')->group(function () {
             Route::get('edit/{id}', 'edit')->name('car.edit');
             Route::post('updated', 'update')->name('car.update');
             Route::get('delete/{id}', 'destroy')->name('car.delete');
+            Route::get('restore/{id}', 'restore')->name('car.restore');
+    
+            Route::get('forcedelete/{id}', 'forceDelete')->name('car.forceDelete');
         });
     });
 

@@ -2,17 +2,25 @@
 @section('title') Agent Registerform @endsection
 <style>
     *{
-        text-decoration: none;
+       
+        padding-left: 12px;
     }
     .continer{
+        padding-top: 12px;
+        text-decoration: none;
         margin-top: 150px;
         margin-left: 300px;
         font-style: oblique;
+        background-color:#f2e7e5;
+        width: 454px;
+        height: 325px;
+        box-shadow: 1px 1px 1px 1px;
         
     }
     input{
         width: 400px;
     }
+    
 </style>
 @section('content')
 
