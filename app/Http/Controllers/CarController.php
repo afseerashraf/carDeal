@@ -23,7 +23,7 @@ class CarController extends Controller
             'name' => $request->carName,
             'brand_id' => $request->brand_id,
         ];
-        if($request->hasFile($request->carimage)){
+        if($request->hasFile('carimage')){
             $fileName = time()."_".$request->carimage->getClientOriginalExtension();
             Storage::putFileAs('uploads/images',$request->carimage,$fileName);
             $input['image'] = $fileName;
@@ -43,8 +43,16 @@ class CarController extends Controller
     public function update(CarRequest $request){
         $carID = Crypt::decrypt($request->id);
         $car = Car::find($carID);
-        $car->name = $request->carName;
-        $car->brand_id = $request->brand_id;
+        $input = [
+            'name' => $request->carName,
+            'brand_id' => $request->brand_id,
+        ];
+        if($request->hasFile('carimage')){
+            $fileName = time().'_'.$request->carimage->getClientOriginalExtension();
+            Storage::putFileAs('uploads/images',$request->carimage, $fileName);
+            $input['image'] = $fileName;
+        }
+        $car->update($input);
         $car->save();
         return redirect()->route('show.cars');
     }

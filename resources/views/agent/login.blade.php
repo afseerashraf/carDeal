@@ -34,7 +34,7 @@
 
 
 <div class="continer">
-    <h3>Logim Form</h3>
+    <h3>Login Form</h3>
     <a href="{{ route('register') }}">Register</a>
     <form action="{{ route('agent.dologin') }}" method="post">
     @csrf

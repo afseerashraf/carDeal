@@ -8,8 +8,9 @@ use App\Models\Customer;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use App\Jobs\CustomerEmail;
+use Illuminate\Http\File;
 use Illuminate\Support\Facades\Storage;
-
+use App\Events\CreateCustomerEvent;
 
 class CustomerController extends Controller
 {
@@ -24,13 +25,14 @@ class CustomerController extends Controller
             'mobile' => $request->mobile,
             'email' => $request->email,
         ];
-        if($request->hasfile('image')){
-            $fileName = time()."_".$request->image->getClientOriginalExtension();
-            Storage::putFileAs('uploads/images',$request->image,$fileName);
+        if ($request->hasfile('image')) {
+            $fileName = time() . "_" . $request->image->getClientOriginalExtension();
+            Storage::putFileAs('uploads/images', $request->image, $fileName);
             $input['image'] = $fileName;
         }
         $customer = Customer::create($input);
         CustomerEmail::dispatch($customer);
+        CreateCustomerEvent::dispatch($customer);
         return redirect()->route('show.customers');
     }
     public function show()
@@ -48,9 +50,17 @@ class CustomerController extends Controller
     {
         $customerID = Crypt::decrypt($request->id);
         $customer = Customer::find($customerID);
-        $customer->name = $request->name;
-        $customer->mobile = $request->mobile;
-        $customer->email = $request->email;
+        $input = [
+            'name' => $request->name,
+            'mobile' => $request->mobile,
+            'email' => $request->email,
+        ];
+        if ($request->hasfile('image')) {
+            $fileName = time() . "_" . $request->image->getClientOriginalExtension();
+            Storage::putFileAs('uploads/images', $request->image, $fileName);
+            $input['image'] = $fileName;
+        }
+        $customer->update($input);
         $customer->save();
         return redirect()->route('show.customers');
     }
@@ -75,12 +85,17 @@ class CustomerController extends Controller
         $customer->forceDelete();
         return redirect()->route('show.customers');
     }
-    public function order($id){
+    public function order($id)
+    {
         $customerID = Crypt::decrypt($id);
         $customer = Customer::find($customerID);
-       if(!$customer->order){
-        return "<h2>".$customer->name." does not have order"."</h2>";
-       }
+        if (!$customer->order) {
+            return "<h2>" . $customer->name . " does not have order" . "</h2>";
+        }
         return view('customer.order', compact('customer'));
+    }
+    public function ukserver()
+    {
+        return view('customer.server');
     }
 }

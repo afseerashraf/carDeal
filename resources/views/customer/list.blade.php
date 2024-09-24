@@ -31,7 +31,7 @@
             <td>{{ ucfirst($customer->name) }}</td>
             <td>{{ $customer->mobile }}</td>
             <td>{{ $customer->email }}</td>
-            <td><img src="{{ asset('storage/images/'.$customer->image) }}" alt="customer Image"></td>
+            <td><img src="{{ asset('storage/images/'.$customer->image) }}" alt="customer Image"></td> 
             <td>
             <a href="{{ route('customer.create') }}" class="btn btn-outline-success">New</a> 
             <a href="{{ route('customer.edit', encrypt($customer->id)) }}" class="btn btn-outline-primary">Edit</a>

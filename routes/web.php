@@ -42,11 +42,9 @@ Route::prefix('agent')->group(function () {
             Route::post('updated', 'update')->name('car.update');
             Route::get('delete/{id}', 'destroy')->name('car.delete');
             Route::get('restore/{id}', 'restore')->name('car.restore');
-    
             Route::get('forcedelete/{id}', 'forceDelete')->name('car.forceDelete');
         });
     });
-
     Route::prefix('customer')->group(function () {
         Route::controller(CustomerController::class)->group(function () {
             Route::get('create', 'create')->name('customer.create');
@@ -58,7 +56,7 @@ Route::prefix('agent')->group(function () {
             Route::get('restore/{id}', 'restore')->name('customer.restore');
             Route::get('forcedelete/{id}', 'forcedelete')->name('customer.forcedelete');
             Route::get('order/{id}', 'order')->name('customer.order');
-            
+            Route::get('UK-server', 'ukserver')->name('broadcast');
         });
     });
 

@@ -16,7 +16,7 @@
     
 <div class="continer">
     <h3>Update Car</h3>
-    <form action="{{ route('car.update') }}" method="post">
+    <form action="{{ route('car.update') }}" method="post" enctype="multipart/form-data">
     @csrf
     <input type="hidden" value="{{ encrypt('$car->id') }}" name="id">
     <label for="brand">Name</label><br>
@@ -25,6 +25,8 @@
     <label for="brand id">Brand id</label><br>
     <input type="text" name="brand_id" placeholder="brand id" value="{{ $car->brand_id }}"><br><br>
     @error('brand_id') <div class="alert alert-danger">{{ $message }}</div> @enderror
+    <input type="file" name="carimage"><br><br>
+
     <input type="submit" class="form-cotroller btn btn-outline-success">
     </form>
 </div>
