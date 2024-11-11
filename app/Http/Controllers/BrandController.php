@@ -14,10 +14,7 @@ class BrandController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        return view('brand.create');
-    }
+   
 
     /**
      * Show the form for creating a new resource.
@@ -84,5 +81,6 @@ class BrandController extends Controller
         return redirect()->route('show.brand');
        
     }
+   
  
 }

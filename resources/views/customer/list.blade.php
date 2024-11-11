@@ -12,7 +12,14 @@
 @section('page')Our Customers @endsection
 
 @section('content')
-
+<h3>{{ __('cusomerList.heading') }}</h3>
+<form action="{{ route('language') }}" method = "get">
+    <select name="lang" id="lang">
+        <option value="english">ENGLISH</option>
+        <option value="malayalam">MALAYALAM</option>
+    </select>
+    <input type="submit" value="submit">
+</form>
 <table class="table">
     <thead>
         <tr>

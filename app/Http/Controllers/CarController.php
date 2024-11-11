@@ -11,14 +11,7 @@ use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Illuminate\Support\Facades\Storage;
 class CarController extends Controller
 {
-    public function create(){
-        return view('car.create');
-    }
     public function store(CarRequest $request){
-        // $car = new Car();
-        // $car->name = $request->carName;
-        // $car->brand_id = $request->brand_id;
-        // $car->save();
         $input = [
             'name' => $request->carName,
             'brand_id' => $request->brand_id,

@@ -1,86 +1,107 @@
 @extends('layout.layout')
 @section('title') Create Brand @endsection
+
 <style>
-    .continer{
-        margin-top: 150px;
-        margin-left: 300px;
-        font-style: oblique;
+    /* Container for centering form */
+    .container {
+        margin-top: 10vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
         
     }
-    .form-continer{
+
+    /* Form container styling */
+    .form-container {
         background-color: #f2ebeb;
-        height: 221px;
-        width: 456px;
-        padding-left: 26px;
-        padding-top: 24px;
-        border-radius: 3px 3px 3px 3px;
-        box-shadow: 2px 2px 3px 3px;
+        padding: 20px 30px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 500px;
+        text-align: center;
     }
-    input{
-        width: 400px;
+
+    /* Input field styling */
+    input[type="text"] {
+        width: 100%;
+        margin-top: 8px;
     }
-    .row{
-        padding-top: 50px;
+
+    /* Row styling for brand images */
+    .row {
+        margin-top: 2rem;
+        justify-content: center;
     }
-    img{
-        height:103px;
+
+    /* Image styling */
+    .brand-logo {
+        height: 100px;
         width: 130px;
         object-fit: cover;
-        transition: 0.5 ease-in-out;
+        transition: transform 0.3s ease-in-out;
         border-radius: 50%;
-        box-shadow: 1px 1px 1px 1px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
-    img:hover{
-    transform: scale(1.1) rotate(-3deg);
-}
-    </style>
+
+    /* Image hover effect */
+    .brand-logo:hover {
+        transform: scale(1.1) rotate(-3deg);
+    }
+</style>
+
 @section('content')
-<div class="continer">
-    
-<div class="form-continer">
-    <form action="{{ route('create.brand') }}" method="post">
-    @csrf
-    <label for="brand">Brand</label><br>
-    <input type="text" name="brandName" id="brand-name-input" placeholder="brand name">
-    @error('brandName') <div class="alert alert-danger">{{ $message }}</div>@enderror<br><br>
-    <input type="submit" class="form-cotroller btn btn-outline-success">
-    </form>
+
+
+<div class="container">
+    <!-- Form container -->
+    <div class="form-container">
+       
+        <form action="{{ route('create.brand') }}" method="post">
+            @csrf
+            <label for="brand">Brand Name</label><br>
+            <input type="text" name="brandName" id="brand-name-input" placeholder="Enter brand name" required>
+            @error('brandName') 
+                <div class="alert alert-danger mt-2">{{ $message }}</div>
+            @enderror
+            <br><br>
+            <input type="submit" class="btn btn-outline-success" value="Add Brand">
+        </form>
+        <a href="{{ route('agent.logout', encrypt($agent->id)) }}" class="btn btn-danger">Logout</a>
+
+    </div>
+
+    <!-- Brand images for selection -->
+    <div class="row mt-4">
+        <div class="col-md-4 mb-4">
+            <img src="{{ asset('brands/hundai.jpeg') }}" alt="Hyundai" value="Hyundai" class="brand-logo">
+        </div>
+        <div class="col-md-4 mb-4">
+            <img src="{{ asset('brands/suzuki.png') }}" alt="Suzuki" value="Suzuki" class="brand-logo">
+        </div>
+        <div class="col-md-4 mb-4">
+            <img src="{{ asset('brands/toyota.jpeg') }}" alt="Toyota" value="Toyota" class="brand-logo">
+        </div>
+        <div class="col-md-4 mb-4">
+            <img src="{{ asset('brands/renault.jpeg') }}" alt="Renault" value="Renault" class="brand-logo">
+        </div>
+        <div class="col-md-4 mb-4">
+            <img src="{{ asset('brands/honda.jpeg') }}" alt="Honda" value="Honda" class="brand-logo">
+        </div>
+        <div class="col-md-4 mb-4">
+            <img src="{{ asset('brands/benz.jpeg') }}" alt="Mercedes-Benz" value="Mercedes-Benz" class="brand-logo">
+        </div>
+    </div>
 </div>
 
-<div class="row">
-    <div class="col-3" mb-4>
-        <img src="{{ asset('brands/hundai.jpeg') }}" alt="hundai" value="hundai" class="brand-logo">
-    </div>
-    <div class="col-3" mb-4>
-        <img src="{{ asset('brands/suzuki.png') }}" alt="suziki" value="suzuki" class="brand-logo">
-    </div>
-    <div class="col-3" mb-4>
-        <img src="{{ asset('brands/toyota.jpeg') }}" alt="toyota" value="toyota" class="brand-logo">
-    </div>
-    <div class="row">
-    <div class="col-3" mb-4>
-        <img src="{{ asset('brands/renault.jpeg') }}" alt="renault" value="renault" class="brand-logo">
-    </div>
-    <div class="col-3" mb-4>
-        <img src="{{ asset('brands/honda.jpeg') }}" alt="honda" value="honda" class="brand-logo">
-    </div>
-    <div class="col-3" mb-4>
-        <img src="{{ asset('brands/benz.jpeg') }}" alt="benz" value="Mercedes-Benz" class="brand-logo">
-    </div>
-</div>
-</div>
-</div>
-
+<!-- jQuery script to autofill brand name input on image click -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
 <script>
-     $(document).ready(function() {
-       $('.brand-logo').click(function(){
-        var brandName = $(this).attr('value');
-        $('#brand-name-input').val(brandName);
-
-       })
+    $(document).ready(function() {
+        $('.brand-logo').on('click', function() {
+            var brandName = $(this).attr('value');
+            $('#brand-name-input').val(brandName);
+        });
     });
 </script>
 @endsection
-

@@ -61,25 +61,20 @@
 
 <body>
     <div class="container">
-        <h3>Login Form</h3>
-        <a href="{{ url('/') }}">Register</a>
-        <form action="{{ route('agent.dologin') }}" method="post">
+        <h3>Reset Password</h3>
+        <form action="{{ route('doreset') }}" method="post">
             @csrf
-
-            <label for="email">Email</label>
-            <input type="email" id="email" class="form-control" name="email" placeholder="Enter email" required>
-            @error('email') <div class="alert alert-danger">{{ $message }}</div> @enderror
-
+            <input type="hidden" name="agent_id" value="{{encrypt($agent->id)}}">
             <label for="password">Password</label>
             <input type="password" id="password" class="form-control" name="password" placeholder="Enter password" required>
             @error('password') <div class="alert alert-danger">{{ $message }}</div> @enderror
+            
+            <label for="password">Confirm Passwod</label>
+            <input type="password" id="password_confirmation" class="form-control" name="password_confirmation" placeholder="Enter password" required>
+            @error('confirmPassword') <div class="alert alert-danger">{{ $message }}</div> @enderror
+            <button type="submit" class="btn btn-outline-primary mt-3">Reset</button>
 
-            <button type="submit" class="btn btn-outline-primary mt-3">Login</button>
 
-            <!-- Forgot Password button -->
-            <a href="{{ route('forgotPasswordEmail') }}" class="btn btn-link mt-2">Forgot Password?</a>
-
-            <p class="footer-text">cardealing</p>
         </form>
     </div>
 

@@ -22,12 +22,12 @@
         @section('page')Customer @endsection
         <form action="{{ route('customer.store') }}" method="post" enctype="multipart/form-data">
             @csrf
-            <input type="text" name="name" placeholder="customer name"><br>
+            <input type="text" name="name" placeholder="customer name" value="{{ old('name') }}"><br>
             @error('name') <p class="alert alert-danger">{{ $message }}</p>@enderror <br>
-            <input type="text" name="mobile" placeholder="Mobile"><br>
+            <input type="text" name="mobile" placeholder="Mobile" value="{{ old('mobile') }}"><br>
             @error('mobile') <p class="alert alert-danger">{{ $message }}</p> @enderror
             <br>
-            <input type="email" name="email" placeholder="email"><br><br>
+            <input type="email" name="email" placeholder="email" value="{{ old('email') }}"><br><br>
             @error('email') <p class="alert alert-danger">{{ $message}}</p> @enderror
             <input type="file" name="image"><br><br>
             <input type="submit" class="form-cotroller btn btn-outline-success">

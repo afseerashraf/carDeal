@@ -11,13 +11,12 @@ use App\Jobs\CustomerEmail;
 use Illuminate\Http\File;
 use Illuminate\Support\Facades\Storage;
 use App\Events\CreateCustomerEvent;
-
+use Illuminate\Support\Facades\App;
+use Illuminate\Database\RecordNotFoundExceptio;
+use Illuminate\Pagination\Paginator;
 class CustomerController extends Controller
 {
-    public function create()
-    {
-        return view('customer.create');
-    }
+    
     public function store(CustomerRequest $request)
     {
         $input = [
@@ -97,5 +96,10 @@ class CustomerController extends Controller
     public function ukserver()
     {
         return view('customer.server');
+    }
+    public function switch(Request $request){
+        $lang = $request->lang;
+        App::setLocale($lang);
+        return redirect()->back();
     }
 }

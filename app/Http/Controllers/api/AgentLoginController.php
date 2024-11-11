@@ -10,6 +10,9 @@ use Illuminate\Support\Facades\Hash;
 
 class AgentLoginController extends Controller
 {
+  public function register(){
+    return view('agent.register');
+  }
     public function login(AgentRequest $request){
       $agent = Agent::where('email', $request->email)->first();
       if(Hash::check($request->password, $agent->password))/*check the request password eaquel to the hashed password*/{

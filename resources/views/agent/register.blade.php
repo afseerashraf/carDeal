@@ -7,51 +7,73 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <title>Register</title>
     <style>
+        /* Reset default padding for all elements */
         * {
-
-            padding-left: 12px;
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
         }
 
-        .continer {
-            padding-top: 12px;
+        /* Centered container styling */
+        .container {
+            max-width: 500px;
+            margin: 10vh auto;
+            padding: 2rem;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Input and label styling */
+        label {
+            font-weight: bold;
+            margin-top: 1rem;
+        }
+
+        input.form-control {
+            margin-bottom: 1rem;
+        }
+
+        /* Adjust link styling */
+        a {
+            display: inline-block;
+            margin-bottom: 1.5rem;
             text-decoration: none;
-            margin-top: 150px;
-            margin-left: 300px;
-            font-style: oblique;
-            background-color: #f2e7e5;
-            width: 454px;
-            height: 325px;
-            box-shadow: 1px 1px 1px 1px;
-
+            color: #0d6efd;
         }
 
-        input {
-            width: 400px;
+        /* Improved button styling */
+        .btn-primary {
+            width: 100%;
         }
     </style>
-    @section('content')
+</head>
 
-    <div class="continer">
-        <h3>Register Form</h3>
-        <a href="{{ route('login') }}">already have an account</a>
+<body>
+    <div class="container">
+        <h3 class="text-center mb-4">Register Form</h3>
+        <a href="{{ route('login') }}">Already have an account?</a>
         <form action="{{ route('agent.register') }}" method="post">
             @csrf
-            <label for="name">Name</label><br>
-            <input type="text" class="form-controller" name="name" placeholder="Name"><br>
+
+            <label for="name">Name</label>
+            <input type="text" id="name" class="form-control" name="name" placeholder="Name" required>
             @error('name') <div class="alert alert-danger">{{ $message }}</div> @enderror
-            <label for="email">email</label><br>
-            <input type="email" class="form-controller" name="email" placeholder="email"><br>
+
+            <label for="email">Email</label>
+            <input type="email" id="email" class="form-control" name="email" placeholder="Email" required>
             @error('email') <div class="alert alert-danger">{{ $message }}</div> @enderror
-            <label for="password">Password</label><br>
-            <input type="password" class="form-controller" name="password" placeholder="password"><br><br>
-            @error('password') <div class="alert alert-danger">{{ $message }}</div>@enderror
-            <input type="submit" class="btn btn-outline-primary" value="register">
+
+            <label for="password">Password</label>
+            <input type="password" id="password" class="form-control" name="password" placeholder="Password" required>
+            @error('password') <div class="alert alert-danger">{{ $message }}</div> @enderror
+
+            <button type="submit" class="btn btn-primary mt-3">Register</button>
         </form>
     </div>
 
+    <!-- Bootstrap scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
-    </body>
+</body>
 
 </html>
