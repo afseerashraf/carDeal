@@ -15,9 +15,9 @@ Route::prefix('agent')->group(function () {
         Route::post('register', 'agentRegister')->name('agent.register');
         Route::view('login', 'agent.login')->name('login');
         Route::post('dologin', 'dologin')->name('agent.dologin');
-        Route::get('logout{id}', 'logout')->name('agent.logout');
+        Route::get('logout', 'logout')->name('agent.logout');
         Route::get('forgot-password', 'showForgetPasswordEmailForm')->name('forgotPasswordEmail');
-        Route::post('forget-password','submitForgetPasswordEmail')->name('forget.password.post'); 
+        Route::post('forget-password','submitForgetPasswordEmail')->name('forget.password.post');
         Route::get('reset/{token}', 'viewresetPasswordForm')->name('viewresetPasswordForm');
         Route::post('doreset', 'doreset')->name('doreset');
 
@@ -73,6 +73,6 @@ Route::middleware('auth:agent')->group(function(){
             Route::view('create', 'order.create')->name('create.order');
             Route::post('store', 'store')->name('store.order');
             Route::get('show', 'show')->name('show.orders');
-          
+
         });
     });

@@ -8,7 +8,7 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        
+
     }
 
     /* Form container styling */
@@ -56,18 +56,22 @@
 <div class="container">
     <!-- Form container -->
     <div class="form-container">
-       
+
+     @if(session('agentName'))
+        <h3>{{ session('agentName') }}</h3>
+    @endif
         <form action="{{ route('create.brand') }}" method="post">
             @csrf
             <label for="brand">Brand Name</label><br>
             <input type="text" name="brandName" id="brand-name-input" placeholder="Enter brand name" required>
-            @error('brandName') 
+            @error('brandName')
                 <div class="alert alert-danger mt-2">{{ $message }}</div>
             @enderror
             <br><br>
             <input type="submit" class="btn btn-outline-success" value="Add Brand">
         </form>
-        <a href="{{ route('agent.logout', encrypt($agent->id)) }}" class="btn btn-danger">Logout</a>
+        
+        <a href="{{ route('agent.logout') }}" class="btn btn-danger">Logout</a>
 
     </div>
 

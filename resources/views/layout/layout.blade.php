@@ -43,6 +43,7 @@
 </head>
 
 <body>
+   
     <ul>
         <li><a href="{{ route('show.brand') }}">Brand</a></li>
         <li><a href="{{ route('show.cars') }}">Car</a></li>

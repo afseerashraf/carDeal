@@ -12,12 +12,13 @@ use App\Http\Requests\LoginRequest;
 use App\Mail\agentresetPassword;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
-use Carbon\Carbon; 
+use Carbon\Carbon;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\agent_resetPassword;
+use Illuminate\Contracts\Session\Session;
 use Illuminate\Validation\Rules\Password;
 
 
@@ -31,26 +32,29 @@ class AgentController extends Controller
         $agent->save();
         return redirect()->route('login');
     }
-   
+
     public function dologin(AgentLogin $request){
        $credentials = ['email' => $request->email, 'password' => $request->password];
 
         if(auth()->guard('agent')->attempt($credentials)){
+
             $agent = auth()->guard('agent')->user();
-           
-            return view('brand.create', compact('agent'));
+
+
+            return view('brand.create', ['agentName' => $agent->name]);
         }else{
             return redirect()->route('login');
         }
 
     }
-    public function logout($id){
-        $agent = Agent::find(Crypt::decrypt($id));
-        
+    public function logout(){
         auth()->guard('agent')->logout();
+
         return redirect()->route('login');
     }
-    public function showForgetPasswordEmailForm(){
+
+    public function showForgetPasswordEmailForm()
+    {
         return view('agent.forgotPassword');
     }
 
@@ -75,7 +79,7 @@ class AgentController extends Controller
         }else{
             return redirect()->route('login');
         }
-        
+
 }
 
 public function viewresetPasswordForm($token){
@@ -93,10 +97,10 @@ public  function doreset(Request $request){
     $request->validate([
         'password' => [
             'required',
-            'confirmed', 
+            'confirmed',
             Password::min(8)->letters()->numbers(),
         ],
-       
+
     ]);
     $agent = Agent::find(Crypt::decrypt(request('agent_id')));
     if ($agent){
@@ -104,11 +108,11 @@ public  function doreset(Request $request){
             'password' => '$request->password',
         ]);
     }
-  
-    return redirect()->route('login');
-}       
 
- 
+    return redirect()->route('login');
+}
+
+
 
 
 }
